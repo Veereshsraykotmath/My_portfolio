@@ -43,6 +43,14 @@ async function sendContactEmail(req, res) {
     });
 
     const transporter = getTransporter();
+    // Verify SMTP connection before sending email
+    try {
+      await transporter.verify();
+      console.log("✅ SMTP connection successful");
+    } catch (err) {
+      console.error("❌ SMTP verification failed:", err);
+      throw err;
+    }
 
     await transporter.sendMail({
       from: `"Portfolio Contact Form" <${process.env.SMTP_USER}>`,
