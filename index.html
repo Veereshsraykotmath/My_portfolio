@@ -1231,6 +1231,285 @@
                 gap: 2rem;
             }
         }
+
+        /* ============================= */
+        /* Contact Section — Form + Card  */
+        /* ============================= */
+        .contact-page-subtitle {
+            max-width: 560px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-top: 1rem;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 2.5rem;
+            margin-top: 4rem;
+            align-items: start;
+        }
+
+        .contact-form-card,
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 2.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+            transition: var(--transition-medium);
+        }
+
+        .contact-form-card:hover,
+        .contact-info-card:hover {
+            border-color: rgba(0, 191, 255, 0.35);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 191, 255, 0.12);
+        }
+
+        /* Honeypot: visually hidden, kept in the accessibility tree removed */
+        .honeypot-field {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row label {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .form-row input,
+        .form-row textarea {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.9rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            resize: vertical;
+        }
+
+        .form-row input:focus,
+        .form-row textarea:focus {
+            outline: none;
+            border-color: var(--ice-blue);
+            background: rgba(0, 191, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.12);
+        }
+
+        .form-row input.invalid,
+        .form-row textarea.invalid {
+            border-color: #ff5c5c;
+        }
+
+        .field-error {
+            font-size: 0.78rem;
+            color: #ff8080;
+            min-height: 1em;
+        }
+
+        .textarea-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .char-counter {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .submit-btn {
+            position: relative;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--gold-accent), #f5d576);
+            color: #000;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        .submit-btn.is-loading .btn-spinner {
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .form-status {
+            margin-top: 1.25rem;
+            font-size: 0.9rem;
+            text-align: center;
+            min-height: 1.2em;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: var(--transition-fast);
+        }
+
+        .form-status.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-status.success {
+            color: #6fe08a;
+        }
+
+        .form-status.error {
+            color: #ff8080;
+        }
+
+        .contact-info-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info-desc {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        a.contact-info-item:hover {
+            border-color: var(--ice-blue);
+            background: rgba(0, 191, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .contact-info-static {
+            cursor: default;
+        }
+
+        .contact-info-item small {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-info-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-accent);
+            flex-shrink: 0;
+        }
+
+        .social-icons-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            transition: var(--transition-fast);
+        }
+
+        .social-icon-btn:hover {
+            border-color: var(--ice-blue);
+            color: var(--ice-blue);
+            transform: translateY(-4px);
+        }
+
+        @media (max-width: 1024px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .contact-form-card,
+            .contact-info-card {
+                padding: 1.75rem;
+            }
+        }
     </style>
 </head>
 
@@ -1731,25 +2010,167 @@
 
     <!-- Contact Section -->
     <section id="contact" class="reveal">
-        <div class="contact-subtitle">Collaborate</div>
-        <h2 class="contact-title">Let's Create Something Cinematic</h2>
-        <div class="contact-links">
-            <a href="mailto:raykotmathveeresh@gmail.com" class="contact-link-item">
-                <small>Send Email</small>
-                raykotmathveeresh@gmail.com
-            </a>
-            <a href="https://instagram.com/VEERAY__VISUALS" target="_blank" rel="noopener" class="contact-link-item">
-                <small>Instagram</small>
-                @VEERAY__VISUALS
-            </a>
-            <a href="https://www.youtube.com/@veeray__visuals" target="_blank" rel="noopener" class="contact-link-item">
-                <small>YouTube</small>
-                @veeray__visuals
-            </a>
-            <a href="https://www.linkedin.com/in/veeresh-s-raykotmath" target="_blank" rel="noopener" class="contact-link-item">
-                <small>LinkedIn</small>
-                Veeresh Raykotmath
-            </a>
+        <div class="section-header">
+            <div>
+                <div class="section-label">Get In Touch</div>
+                <h2 class="section-title">Let's Work Together</h2>
+            </div>
+            <div class="contact-page-subtitle">Have a project in mind, want to collaborate, or simply want to say
+                hello? I'd love to hear from you.</div>
+        </div>
+
+        <div class="contact-layout">
+
+            <!-- Contact Form Card -->
+            <div class="contact-form-card">
+                <form id="contactForm" novalidate>
+                    <!-- Honeypot field: hidden from real visitors, catches basic bots -->
+                    <div class="honeypot-field" aria-hidden="true">
+                        <label for="companyWebsite">Company Website</label>
+                        <input type="text" id="companyWebsite" name="honeypot" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="form-row">
+                        <label for="contactName">Full Name</label>
+                        <input type="text" id="contactName" name="name" required minlength="2"
+                            placeholder="Your name" aria-required="true">
+                        <span class="field-error" id="nameError"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="contactEmail">Email Address</label>
+                        <input type="email" id="contactEmail" name="email" required placeholder="you@example.com"
+                            aria-required="true">
+                        <span class="field-error" id="emailError"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" name="subject" required minlength="3"
+                            placeholder="What's this about?" aria-required="true">
+                        <span class="field-error" id="subjectError"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" name="message" required minlength="10" rows="5"
+                            placeholder="Tell me about your project…" aria-required="true"
+                            maxlength="5000"></textarea>
+                        <div class="textarea-footer">
+                            <span class="field-error" id="messageError"></span>
+                            <span class="char-counter"><span id="charCount">0</span>/5000</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-label">Send Message</span>
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                    </button>
+
+                    <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+
+            <!-- Contact Info Card -->
+            <div class="contact-info-card">
+                <h3 class="contact-info-title">Contact Information</h3>
+                <p class="contact-info-desc">Prefer to reach out directly? Here's every way to find me.</p>
+
+                <div class="contact-info-list">
+                    <a href="mailto:raykotmathveeresh@gmail.com" class="contact-info-item">
+                        <span class="contact-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16v16H4z" opacity="0"></path>
+                                <path d="M22 6l-10 7L2 6"></path>
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            </svg>
+                        </span>
+                        <span>
+                            <small>Email</small>
+                            raykotmathveeresh@gmail.com
+                        </span>
+                    </a>
+
+                    <a href="tel:" class="contact-info-item" id="phoneLink">
+                        <span class="contact-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                        </span>
+                        <span>
+                            <small>Phone</small>
+                            Add your number
+                        </span>
+                    </a>
+
+                    <div class="contact-info-item contact-info-static">
+                        <span class="contact-info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <span>
+                            <small>Location</small>
+                            Add your city
+                        </span>
+                    </div>
+                </div>
+
+                <div class="social-icons-row">
+                    <a href="https://instagram.com/VEERAY__VISUALS" target="_blank" rel="noopener"
+                        class="social-icon-btn" aria-label="Instagram" title="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/veeresh-s-raykotmath" target="_blank" rel="noopener"
+                        class="social-icon-btn" aria-label="LinkedIn" title="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/" target="_blank" rel="noopener" class="social-icon-btn"
+                        aria-label="GitHub" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/" target="_blank" rel="noopener" class="social-icon-btn"
+                        aria-label="X (Twitter)" title="X (Twitter)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4l16 16M20 4L4 20"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@veeray__visuals" target="_blank" rel="noopener"
+                        class="social-icon-btn" aria-label="YouTube" title="YouTube">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1911,6 +2332,149 @@
                 }, { root: null, threshold: 0.15, rootMargin: '200px 0px' });
 
                 reelCards.forEach(card => reelObserver.observe(card));
+            }
+
+            // ============================= //
+            // Contact Form — Validation,     //
+            // Submission & SMTP Integration  //
+            // ============================= //
+            // IMPORTANT: point this at your deployed backend's /api/contact
+            // endpoint once it's live on Render (see backend README.md).
+            const CONTACT_API_URL = 'http://localhost:5000/api/contact';
+
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                const nameInput = document.getElementById('contactName');
+                const emailInput = document.getElementById('contactEmail');
+                const subjectInput = document.getElementById('contactSubject');
+                const messageInput = document.getElementById('contactMessage');
+                const charCount = document.getElementById('charCount');
+                const submitBtn = document.getElementById('submitBtn');
+                const formStatus = document.getElementById('formStatus');
+
+                const errorEls = {
+                    name: document.getElementById('nameError'),
+                    email: document.getElementById('emailError'),
+                    subject: document.getElementById('subjectError'),
+                    message: document.getElementById('messageError'),
+                };
+
+                // Live character counter for the message field
+                messageInput.addEventListener('input', () => {
+                    charCount.textContent = messageInput.value.length;
+                });
+
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                function setFieldError(input, errorEl, message) {
+                    errorEl.textContent = message || '';
+                    input.classList.toggle('invalid', Boolean(message));
+                }
+
+                function validateForm() {
+                    let valid = true;
+
+                    if (nameInput.value.trim().length < 2) {
+                        setFieldError(nameInput, errorEls.name, 'Please enter your full name.');
+                        valid = false;
+                    } else {
+                        setFieldError(nameInput, errorEls.name, '');
+                    }
+
+                    if (!emailPattern.test(emailInput.value.trim())) {
+                        setFieldError(emailInput, errorEls.email, 'Please enter a valid email address.');
+                        valid = false;
+                    } else {
+                        setFieldError(emailInput, errorEls.email, '');
+                    }
+
+                    if (subjectInput.value.trim().length < 3) {
+                        setFieldError(subjectInput, errorEls.subject, 'Please enter a subject.');
+                        valid = false;
+                    } else {
+                        setFieldError(subjectInput, errorEls.subject, '');
+                    }
+
+                    if (messageInput.value.trim().length < 10) {
+                        setFieldError(messageInput, errorEls.message, 'Message should be at least 10 characters.');
+                        valid = false;
+                    } else {
+                        setFieldError(messageInput, errorEls.message, '');
+                    }
+
+                    return valid;
+                }
+
+                function showStatus(message, type) {
+                    formStatus.textContent = message;
+                    formStatus.className = 'form-status show ' + type;
+                }
+
+                function setLoading(isLoading) {
+                    submitBtn.disabled = isLoading;
+                    submitBtn.classList.toggle('is-loading', isLoading);
+                    submitBtn.querySelector('.btn-label').textContent = isLoading ? 'Sending...' : 'Send Message';
+                }
+
+                [nameInput, emailInput, subjectInput, messageInput].forEach(input => {
+                    input.addEventListener('blur', validateForm);
+                });
+
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    if (!validateForm()) {
+                        showStatus('Please fix the highlighted fields and try again.', 'error');
+                        return;
+                    }
+
+                    setLoading(true);
+                    formStatus.className = 'form-status';
+                    formStatus.textContent = '';
+
+                    const payload = {
+                        name: nameInput.value.trim(),
+                        email: emailInput.value.trim(),
+                        subject: subjectInput.value.trim(),
+                        message: messageInput.value.trim(),
+                        honeypot: document.getElementById('companyWebsite').value,
+                    };
+
+                    try {
+                        const response = await fetch(CONTACT_API_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload),
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok && data.success) {
+                            showStatus(
+                                data.message || "Thank you! Your message has been sent successfully. I'll get back to you soon.",
+                                'success'
+                            );
+                            contactForm.reset();
+                            charCount.textContent = '0';
+                        } else if (data.errors) {
+                            // Server-side validation errors keyed by field
+                            Object.entries(data.errors).forEach(([field, msg]) => {
+                                const input = document.getElementById('contact' + field.charAt(0).toUpperCase() + field.slice(1));
+                                if (input && errorEls[field]) setFieldError(input, errorEls[field], msg);
+                            });
+                            showStatus('Please fix the highlighted fields and try again.', 'error');
+                        } else {
+                            showStatus(
+                                data.message || 'Sorry! Something went wrong. Please try again later.',
+                                'error'
+                            );
+                        }
+                    } catch (err) {
+                        showStatus('Sorry! Something went wrong. Please try again later.', 'error');
+                    } finally {
+                        setLoading(false);
+                    }
+                });
             }
 
             // Mobile Hamburger Menu Navigation Toggle
