@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Veeray Visuals — Veeresh Raykotmath. High-end cinematic video editor. Sculpting time, light, and sound into emotion.">
+    <title>VEERAY VISUALS | Cinematic Video Editor</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Variable Tokens */
+        :root {
+            --bg-color: #000000;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --gold-accent: #D4AF37;
+            --ice-blue: #00BFFF;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Space Grotesk', 'Inter', sans-serif;
+            --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-medium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--ice-blue);
+        }
+
+        /* Typography & Layout Utilities */
+        body {
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-slow);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sticky Minimal Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: var(--transition-medium);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .logo:hover {
+            color: var(--ice-blue);
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition-fast);
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: var(--ice-blue);
+            transition: var(--transition-medium);
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Hamburger Icon */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1100;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: var(--text-primary);
+            position: absolute;
+            transition: var(--transition-medium);
+        }
+
+        .mobile-menu-btn span:nth-child(1) {
+            top: 0;
+        }
+
+        .mobile-menu-btn span:nth-child(2) {
+            top: 9px;
+        }
+
+        .mobile-menu-btn span:nth-child(3) {
+            bottom: 0;
+        }
+
+        .mobile-menu-btn.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+            background-color: var(--ice-blue);
+        }
+
+        .mobile-menu-btn.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.open span:nth-child(3) {
+            transform: translateY(-10px) rotate(-45deg);
+            background-color: var(--ice-blue);
+        }
+
+        /* Mobile Navigation Overlay */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(25px);
+            z-index: 1050;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-nav-overlay.open {
+            right: 0;
+        }
+
+        .mobile-nav-overlay a {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: var(--transition-fast);
+        }
+
+        .mobile-nav-overlay a:hover {
+            color: var(--ice-blue);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 2rem;
+            background: radial-gradient(circle at center, rgba(0, 191, 255, 0.03) 0%, rgba(0, 0, 0, 0) 70%), var(--bg-color);
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.35em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 7.5rem);
+            font-weight: 400;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            background: linear-gradient(180deg, #FFFFFF 60%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-style: italic;
+            color: var(--gold-accent);
+            margin-bottom: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 3rem;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-medium);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; 
+        }
+
+        .hero-cta:hover {
+            border-color: var(--ice-blue);
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            background-color: rgba(0, 191, 255, 0.02);
+        }
+
+        .hero-cta svg {
+            transition: transform var(--transition-fast);
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            opacity: 0;
+            animation: heroFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards, pulseIndicator 2s infinite ease-in-out;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background-color: var(--border-color);
+            position: relative;
+        }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseIndicator {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: translateY(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(6px);
+            }
+        }
+
+        /* Work Section */
+        .section-header {
+            margin-bottom: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-left: 2px solid var(--ice-blue);
+            padding-left: 1.5rem;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--ice-blue);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 450px;
+            margin-top: 1rem;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #111111 0%, #000000 100%);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition-medium);
+        }
+
+        .project-card:hover {
+            border-color: rgba(0, 191, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-image-wrapper {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #0e0e0e 0%, #020202 100%);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+            filter: grayscale(20%) brightness(85%);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition-medium);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-cta {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.8rem 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 0;
+            transition: var(--transition-fast);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card:hover .project-cta {
+            border-color: var(--ice-blue);
+            background: rgba(0, 191, 255, 0.1);
+        }
+
+        .project-info {
+            padding: 1.8rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .project-genre {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ice-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            transition: var(--transition-fast);
+        }
+
+        .project-card:hover .project-title {
+            color: var(--text-primary);
+        }
+
+        /* About Section (Split Portrait & Quote Layout) */
+        #about {
+            background: radial-gradient(circle at bottom right, rgba(0, 191, 255, 0.02) 0%, rgba(0, 0, 0, 0) 60%), var(--bg-color);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image-container {
+            position: relative;
+            aspect-ratio: 4/5;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            background: linear-gradient(135deg, #111111 0%, #000000 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transition: var(--transition-slow);
+        }
+
+        .about-image-container:hover {
+            border-color: var(--ice-blue);
+            box-shadow: 0 20px 40px rgba(0, 191, 255, 0.15);
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(85%);
+            transition: var(--transition-slow);
+        }
+
+        .about-image-container:hover .about-image {
+            filter: grayscale(20%) brightness(100%);
+            transform: scale(1.03);
+        }
+
+        .about-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
+            pointer-events: none;
+        }
+
+        .about-content {
+            text-align: left;
+            position: relative;
+        }
+
+        .about-quote-mark {
+            font-family: var(--font-display);
+            font-size: 8rem;
+            line-height: 0;
+            color: rgba(255, 255, 255, 0.05);
+            position: absolute;
+            top: -1.5rem;
+            left: -2rem;
+            pointer-events: none;
+        }
+
+        .about-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text span {
+            color: var(--ice-blue);
+        }
+
+        .about-author {
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .about-author span {
+            color: var(--gold-accent);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-card {
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-medium);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .skill-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .skill-icon {
+            color: var(--ice-blue);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .skill-name {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .service-card {
+            border: 1px solid var(--border-color);
+            padding: 3.5rem;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
+            transition: var(--transition-slow);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 12px 12px;
+            border-color: transparent transparent var(--border-color) transparent;
+            transition: var(--transition-fast);
+        }
+
+        .service-card:hover {
+            border-color: var(--ice-blue);
+            box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.05);
+        }
+
+        .service-card:hover::after {
+            border-color: transparent transparent var(--ice-blue) transparent;
+        }
+
+        .service-number {
+            font-size: 0.9rem;
+            color: var(--ice-blue);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            display: inline-block;
+            font-family: var(--font-sans);
+            letter-spacing: 0.1em;
+        }
+
+        .service-title {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .service-features li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .service-features li::before {
+            content: '—';
+            color: var(--ice-blue);
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+            padding: 10rem 2rem;
+            background: radial-gradient(circle at center bottom, rgba(212, 175, 55, 0.02) 0%, rgba(0, 0, 0, 0) 70%), var(--bg-color);
+            border-bottom: none;
+        }
+
+        .contact-subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-accent);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .contact-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-weight: 300;
+            margin-bottom: 4rem;
+            line-height: 1.2;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            margin-bottom: 5rem;
+        }
+
+        .contact-link-item {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 0.5rem;
+            transition: var(--transition-medium);
+        }
+
+        .contact-link-item small {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .contact-link-item:hover small {
+            color: var(--ice-blue);
+        }
+
+        .contact-link-item:hover {
+            color: var(--ice-blue);
+        }
+
+        .contact-link-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--border-color);
+            transition: var(--transition-medium);
+        }
+
+        .contact-link-item:hover::after {
+            background-color: var(--ice-blue);
+            width: 100%;
+        }
+
+        /* Footer Copyright */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background-color: #000;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        footer span {
+            color: var(--ice-blue);
+        }
+
+        /* Custom Video Player Modal (Glassmorphism & Cinematic Backdrop) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-medium);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .modal.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 1100px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border: 1px solid var(--border-color);
+            position: relative;
+            transform: scale(0.95);
+            transition: var(--transition-slow);
+            box-shadow: 0 0 50px rgba(0, 191, 255, 0.2);
+        }
+
+        .modal.open .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -3.5rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .modal-close:hover {
+            color: var(--ice-blue);
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Cinematic Grain Overlay — subtle film texture across the whole page */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+            background-size: 180px 180px;
+        }
+
+        /* Timeline Scrubber — reads scroll position like a video editor's playhead */
+        .timeline-scrub {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.06);
+            z-index: 1001;
+        }
+
+        .timeline-scrub-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--ice-blue), var(--gold-accent));
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+        }
+
+        /* Trailing Cursor Ring — desktop pointer devices only, native cursor stays visible */
+        @media (pointer: fine) {
+            .cursor-ring {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 28px;
+                height: 28px;
+                border: 1px solid rgba(0, 191, 255, 0.45);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                opacity: 0;
+                transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease, opacity 0.3s ease;
+            }
+
+            .cursor-ring.visible {
+                opacity: 1;
+            }
+
+            .cursor-ring.hovering {
+                width: 54px;
+                height: 54px;
+                border-color: var(--gold-accent);
+                background: rgba(212, 175, 55, 0.06);
+            }
+        }
+
+        @media (pointer: coarse) {
+            .cursor-ring {
+                display: none;
+            }
+        }
+
+        /* Elegant fallback treatment for missing project/portrait images */
+        .project-image-wrapper.no-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0px, rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 12px),
+                radial-gradient(circle at center, rgba(0, 191, 255, 0.08), transparent 70%);
+        }
+
+        .project-image-wrapper.no-image::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .about-image-container.no-image::before {
+            content: 'VR';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 6rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.08);
+            letter-spacing: 0.05em;
+        }
+
+        /* Accessible keyboard focus states */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--ice-blue);
+            outline-offset: 4px;
+        }
+
+        /* Respect reduced-motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .cursor-ring {
+                display: none;
+            }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            section {
+                padding: 6rem 2rem;
+            }
+
+            .work-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.2rem 2rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                gap: 2rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image-container {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .about-content {
+                text-align: center;
+            }
+
+            .about-quote-mark {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .reels-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .reels-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ============================= */
+        /* Featured Reels Section         */
+        /* ============================= */
+        .reels-subtitle {
+            max-width: 620px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-top: 1rem;
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        /* Individual reel card: glassmorphism + border glow on hover */
+        .reel-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition-medium);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .reel-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            border-color: var(--ice-blue);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 191, 255, 0.25);
+        }
+
+        /* Embed wrapper keeps a consistent 9:16 reel aspect ratio */
+        .reel-embed-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: rgba(255, 255, 255, 0.02);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .reel-embed {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .reel-embed iframe {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Shown until the real embed lazy-loads in */
+        .reel-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: var(--transition-fast);
+            pointer-events: none;
+        }
+
+        .reel-embed-wrapper.is-loaded .reel-loading {
+            opacity: 0;
+        }
+
+        .reel-info {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .reel-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .reel-desc {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .reel-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .reel-username {
+            font-size: 0.85rem;
+            color: var(--gold-accent);
+            letter-spacing: 0.03em;
+        }
+
+        .reel-view-btn {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            transition: var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .reel-view-btn:hover {
+            border-color: var(--ice-blue);
+            color: var(--ice-blue);
+        }
+
+        @media (max-width: 768px) {
+            .reels-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Global handler must load before any <img> can fire onerror -->
+    <script>
+        function handleImageError(imgEl) {
+            imgEl.style.display = 'none';
+            const wrapper = imgEl.closest('.project-image-wrapper') || imgEl.closest('.about-image-container');
+            if (wrapper) wrapper.classList.add('no-image');
+        }
+    </script>
+
+    <!-- Film Grain Texture -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- Scroll Timeline Scrubber -->
+    <div class="timeline-scrub" aria-hidden="true">
+        <div class="timeline-scrub-fill" id="scrub-fill"></div>
+    </div>
+
+    <!-- Trailing Cursor Ring (desktop only) -->
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Sticky Header -->
+    <header>
+        <a href="#hero" class="logo">VEERAY VISUALS</a>
+        <nav>
+            <a href="#work">Work</a>
+            <a href="#reels">Reels</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay">
+        <a href="#work" class="mobile-link">Work</a>
+        <a href="#reels" class="mobile-link">Reels</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-subtitle">Veeresh Raykotmath</div>
+        <h1 class="hero-title">VEERAY VISUALS</h1>
+        <div class="hero-tagline">"Every Frame Tells a Story."</div>
+        <button class="hero-cta" id="watch-reel-btn">
+            Watch My Reel
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+        </button>
+        <a href="#work" class="scroll-indicator">
+            Scroll
+        </a>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="reveal">
+        <div class="section-header">
+            <div>
+                <div class="section-label">Selected Works</div>
+                <h2 class="section-title">Cinematic Stories</h2>
+            </div>
+            <div class="section-desc">A showcase of high-impact music videos and short-form reels — cinematic
+                pacing, deep color, and cuts built to be felt.</div>
+        </div>
+
+        <div class="work-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-video-url="https://drive.google.com/file/d/13vxHX3dMxmW2tQBvXV6qlINSv80Gz8du/preview">
+                <div class="project-image-wrapper">
+                    <img src="assets/journey_veeray_visuals.png" alt="Journey of Veeray Visuals — Reel thumbnail"
+                        class="project-image" onerror="handleImageError(this)">
+                    <div class="project-overlay">
+                        <span class="project-cta">View Project ↗</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-genre">Reel / Short-form</div>
+                    <h3 class="project-title">Journey of Veeray Visuals</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Featured Reels Section         -->
+    <!-- Easy editing: for each .reel-card below, update the 3 marked spots:
+         1) data-reel-url on .reel-card AND .reel-embed (must match)
+         2) .reel-title / .reel-desc text
+         3) .reel-username text and the href on .reel-view-btn (must match the reel URL)
+    -->
+    <section id="reels" class="reveal">
+        <div class="section-header">
+            <div>
+                <div class="section-label">Featured Instagram Reels</div>
+                <h2 class="section-title">My Best Video Edits</h2>
+            </div>
+            <div class="reels-subtitle">Explore my most creative edits, cinematic transitions, and storytelling
+                through short-form content.</div>
+        </div>
+
+        <div class="reels-grid">
+
+            <!-- Reel 1 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C1a2B3c4D5e/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C1a2B3c4D5e/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C1a2B3c4D5e/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 2 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C2b3C4d5E6f/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C2b3C4d5E6f/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Music Video — Speed Ramp Edit</h3>
+                    <p class="reel-desc">High-energy beat-synced cuts with dynamic speed ramps and punchy motion
+                        transitions.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C2b3C4d5E6f/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 3 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C3c4D5e6F7g/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C3c4D5e6F7g/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Brand Reel — Product Launch</h3>
+                    <p class="reel-desc">Clean, minimal pacing built to highlight product detail shots with subtle
+                        sound design.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C3c4D5e6F7g/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 4 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C4d5E6f7G8h/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C4d5E6f7G8h/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Travel Story — Color Graded Cut</h3>
+                    <p class="reel-desc">A sensory travel edit built around light, texture, and a cinematic LUT
+                        signature.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C4d5E6f7G8h/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 5 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C5e6F7g8H9i/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C5e6F7g8H9i/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Dance Reel — Beat Sync Edit</h3>
+                    <p class="reel-desc">Frame-accurate cuts locked to the beat, with snappy zooms and impact
+                        transitions.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C5e6F7g8H9i/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 6 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C6f7G8h9I0j/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C6f7G8h9I0j/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Fashion Reel — Editorial Cut</h3>
+                    <p class="reel-desc">Slow, deliberate pacing with dramatic lighting cuts for a high-fashion
+                        editorial feel.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C6f7G8h9I0j/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 7 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C7g8H9i0J1k/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C7g8H9i0J1k/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Food Reel — Fast-Paced Montage</h3>
+                    <p class="reel-desc">Punchy, high-retention cuts with crisp foley layering for a satisfying
+                        sensory edit.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C7g8H9i0J1k/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 8 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C8h9I0j1K2l/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C8h9I0j1K2l/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Event Recap — Emotional Cut</h3>
+                    <p class="reel-desc">A heartfelt highlight edit balancing candid moments with cinematic
+                        transitions.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C8h9I0j1K2l/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 9 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C9i0J1k2L3m/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C9i0J1k2L3m/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Automotive Reel — Cinematic Drive</h3>
+                    <p class="reel-desc">Sweeping motion shots and speed ramps built for an adrenaline-driven
+                        automotive story.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C9i0J1k2L3m/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Reel 10 -->
+            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C0j1K2l3M4n/">
+                <div class="reel-embed-wrapper">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C0j1K2l3M4n/"></div>
+                    <div class="reel-loading">Loading reel…</div>
+                </div>
+                <div class="reel-info">
+                    <h3 class="reel-title">Portrait Reel — Mood & Light</h3>
+                    <p class="reel-desc">An intimate, character-driven cut focused on natural light and quiet
+                        emotional beats.</p>
+                    <div class="reel-footer">
+                        <span class="reel-username">@veeray__visuals</span>
+                        <a href="https://www.instagram.com/reel/C0j1K2l3M4n/" target="_blank" rel="noopener"
+                            class="reel-view-btn">View on Instagram ↗</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="reveal">
+        <div class="about-grid">
+            <div class="about-image-container">
+                <img src="assets/veeresh_portrait.png" alt="Veeresh Raykotmath Portrait" class="about-image"
+                    onerror="handleImageError(this)">
+            </div>
+            <div class="about-content">
+                <span class="about-quote-mark">“</span>
+                <blockquote class="about-text">
+                    "Years deep into music videos and reels, I don't just edit — I build <span>moments</span> that hit
+                    on the first beat and linger long after. Every cut is deliberate, every transition earns its
+                    place, and every frame is engineered for <span>emotion</span>. This is cinematic storytelling
+                    built for a scroll-stopping world — bold, relentless, and impossible to <span>ignore</span>."
+                </blockquote>
+                <cite class="about-author">— Veeresh Raykotmath, <span>Veeray Visuals</span></cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="reveal">
+        <div class="section-header">
+            <div>
+                <div class="section-label">Expertise</div>
+                <h2 class="section-title">The Craft</h2>
+            </div>
+        </div>
+
+        <div class="skills-container">
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="skill-name">Adobe Premiere Pro</h3>
+                    <p class="skill-desc">Expert-level mastery of standard NLE timeline editing, complex nesting,
+                        dynamic link workflows, and custom shortcuts for rapid editorial pacing.</p>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 18H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path>
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="skill-name">CapCut Pro</h3>
+                    <p class="skill-desc">Advanced timeline mechanics for high-retention short-form reels,
+                        micro-transitions, stylized captions, and high-impact visual design.</p>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                        <path d="M2 12h20"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="skill-name">Color Grading</h3>
+                    <p class="skill-desc">Crafting tailored LUT signatures, secondary color correction, skin-tone
+                        optimization, and dramatic color spaces that define a video's core tone.</p>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="skill-name">Sound Design</h3>
+                    <p class="skill-desc">Multi-track audio styling, sound effects layering (Foley), crisp vocal
+                        levelling, and tight beat synchronization to elevate sensory immersion.</p>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                        </path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="skill-name">Cinematic Cuts</h3>
+                    <p class="skill-desc">Applying J-cuts, L-cuts, smash cuts, match cuts, and tension curves that guide
+                        viewers through complex stories naturally.</p>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="skill-name">Motion Transitions</h3>
+                    <p class="skill-desc">Designing seamless speed ramps, zoom transitions, motion blurs, and graphical
+                        overlaps without disrupting the cinematic flow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="reveal">
+        <div class="section-header">
+            <div>
+                <div class="section-label">Offerings</div>
+                <h2 class="section-title">Premium Services</h2>
+            </div>
+        </div>
+
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="service-number">01 // VISUAL NARRATIVES</div>
+                <h3 class="service-title">Cinematic Film Editing</h3>
+                <p class="skill-desc">End-to-end post-production for short films, music videos, and cinematic brand
+                    pieces. Translating raw ideas into breathtaking editorial pieces.</p>
+                <ul class="service-features">
+                    <li>Dynamic pacing and story refinement</li>
+                    <li>Advanced multi-cam coordination</li>
+                    <li>Premium 4K rendering and deliverables</li>
+                </ul>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="service-number">02 // CHROMATIC SIGNATURES</div>
+                <h3 class="service-title">Color Grading</h3>
+                <p class="skill-desc">Establishing mood through professional digital color spaces. Sculpting highlights,
+                    midtones, and shadows for target sensory impacts.</p>
+                <ul class="service-features">
+                    <li>LUT styling & look matching</li>
+                    <li>HDR contrast balancing</li>
+                    <li>Sleek, high-contrast black & white profiles</li>
+                </ul>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="service-number">03 // DYNAMIC RETENTION</div>
+                <h3 class="service-title">Social Media Reels</h3>
+                <p class="skill-desc">High-concept short-form content designed to capture viewer eyes in seconds, built
+                    on fast pacing, bold typography, and visual hooks.</p>
+                <ul class="service-features">
+                    <li>Sound design beat drops</li>
+                    <li>Custom kinetic visual captions</li>
+                    <li>Optimal aspect ratios (9:16 vertical)</li>
+                </ul>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="service-number">04 // AUDIO ENVIRONMENT</div>
+                <h3 class="service-title">Sound Design</h3>
+                <p class="skill-desc">Building rich acoustic soundscapes to ground the visuals. From subtle foley
+                    textures to booming epic background soundtracks.</p>
+                <ul class="service-features">
+                    <li>Crisp dialogue isolation & leveling</li>
+                    <li>Spatially balanced atmospheric layers</li>
+                    <li>Dynamic sound effect integration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="reveal">
+        <div class="contact-subtitle">Collaborate</div>
+        <h2 class="contact-title">Let's Create Something Cinematic</h2>
+        <div class="contact-links">
+            <a href="mailto:raykotmathveeresh@gmail.com" class="contact-link-item">
+                <small>Send Email</small>
+                raykotmathveeresh@gmail.com
+            </a>
+            <a href="https://instagram.com/VEERAY__VISUALS" target="_blank" rel="noopener" class="contact-link-item">
+                <small>Instagram</small>
+                @VEERAY__VISUALS
+            </a>
+            <a href="https://www.youtube.com/@veeray__visuals" target="_blank" rel="noopener" class="contact-link-item">
+                <small>YouTube</small>
+                @veeray__visuals
+            </a>
+            <a href="https://www.linkedin.com/in/veeresh-s-raykotmath" target="_blank" rel="noopener" class="contact-link-item">
+                <small>LinkedIn</small>
+                Veeresh Raykotmath
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer Copyright -->
+    <footer>
+        &copy; 2026 VEERAY VISUALS. All rights reserved. Designed for <span>Veeresh Raykotmath</span>.
+    </footer>
+
+    <!-- Video Modal Player -->
+    <div class="modal" id="video-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" aria-label="Close video player">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                Close
+            </button>
+            <div class="video-container">
+                <iframe id="modal-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Actions & IntersectionObserver -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Timeline Scrubber — fills as the page scrolls, like a playhead
+            const scrubFill = document.getElementById('scrub-fill');
+            const updateScrub = () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                scrubFill.style.width = progress + '%';
+            };
+            window.addEventListener('scroll', updateScrub, { passive: true });
+            updateScrub();
+
+            // Trailing Cursor Ring — desktop pointer devices only
+            const cursorRing = document.getElementById('cursor-ring');
+            if (cursorRing && window.matchMedia('(pointer: fine)').matches) {
+                let ringX = 0, ringY = 0, mouseX = 0, mouseY = 0;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    cursorRing.classList.add('visible');
+                });
+
+                const animateRing = () => {
+                    ringX += (mouseX - ringX) * 0.18;
+                    ringY += (mouseY - ringY) * 0.18;
+                    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+                    requestAnimationFrame(animateRing);
+                };
+                animateRing();
+
+                document.querySelectorAll('a, button, .project-card').forEach((el) => {
+                    el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+                    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+                });
+
+                document.addEventListener('mouseleave', () => cursorRing.classList.remove('visible'));
+            }
+
+            // Scroll-Triggered Reveals using IntersectionObserver
+            const revealElements = document.querySelectorAll('.reveal');
+            const observerOptions = {
+                root: null,
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: stop observing once revealed
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+
+            // ============================= //
+            // Instagram Reels — Lazy Loading //
+            // ============================= //
+            // Only fetches/loads Instagram's embed script once the Reels section
+            // scrolls into view, and only builds each embed the first time its
+            // own card becomes visible. Keeps the page fast on first load.
+            let instagramScriptLoading = false;
+            let instagramScriptLoaded = false;
+
+            const loadInstagramEmbedScript = (onReady) => {
+                if (instagramScriptLoaded && window.instgrm) {
+                    onReady();
+                    return;
+                }
+                if (instagramScriptLoading) {
+                    // Script already on its way in — wait for it.
+                    const waitForScript = setInterval(() => {
+                        if (window.instgrm) {
+                            clearInterval(waitForScript);
+                            onReady();
+                        }
+                    }, 100);
+                    return;
+                }
+                instagramScriptLoading = true;
+                const script = document.createElement('script');
+                script.src = 'https://www.instagram.com/embed.js';
+                script.async = true;
+                script.onload = () => {
+                    instagramScriptLoaded = true;
+                    onReady();
+                };
+                document.body.appendChild(script);
+            };
+
+            const buildReelEmbed = (embedContainer) => {
+                const reelUrl = embedContainer.getAttribute('data-reel-src');
+                if (!reelUrl || embedContainer.dataset.built === 'true') return;
+                embedContainer.dataset.built = 'true';
+
+                const blockquote = document.createElement('blockquote');
+                blockquote.className = 'instagram-media';
+                blockquote.setAttribute('data-instgrm-permalink', reelUrl);
+                blockquote.setAttribute('data-instgrm-version', '14');
+                blockquote.style.margin = '0';
+                blockquote.style.width = '100%';
+                embedContainer.appendChild(blockquote);
+
+                loadInstagramEmbedScript(() => {
+                    if (window.instgrm && window.instgrm.Embeds) {
+                        window.instgrm.Embeds.process();
+                    }
+                    const wrapper = embedContainer.closest('.reel-embed-wrapper');
+                    if (wrapper) {
+                        // Give the embed a moment to render before hiding the loading state
+                        setTimeout(() => wrapper.classList.add('is-loaded'), 800);
+                    }
+                });
+            };
+
+            const reelCards = document.querySelectorAll('.reel-card');
+            if (reelCards.length) {
+                const reelObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const embedContainer = entry.target.querySelector('.reel-embed');
+                            if (embedContainer) buildReelEmbed(embedContainer);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { root: null, threshold: 0.15, rootMargin: '200px 0px' });
+
+                reelCards.forEach(card => reelObserver.observe(card));
+            }
+
+            // Mobile Hamburger Menu Navigation Toggle
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const mobileNav = document.querySelector('.mobile-nav-overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            const toggleMobileMenu = () => {
+                mobileBtn.classList.toggle('open');
+                mobileNav.classList.toggle('open');
+                document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+            };
+
+            mobileBtn.addEventListener('click', toggleMobileMenu);
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileBtn.classList.remove('open');
+                    mobileNav.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Smooth active navigation highlighting based on sections
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+
+            window.addEventListener('scroll', () => {
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    // Trigger adjustment when scroll point reaches near section top middle
+                    if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                        // Apply active style
+                        link.style.color = '#FFFFFF';
+                    } else {
+                        link.style.color = '';
+                    }
+                });
+            });
+
+            // Video Modal Functionality
+            const videoModal = document.getElementById('video-modal');
+            const modalIframe = document.getElementById('modal-iframe');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const watchReelBtn = document.getElementById('watch-reel-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            // Default showreel video
+            const defaultShowreelUrl = "https://drive.google.com/file/d/13vxHX3dMxmW2tQBvXV6qlINSv80Gz8du/preview";
+
+            const openVideoModal = (url) => {
+                modalIframe.src = url;
+                videoModal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeVideoModal = () => {
+                videoModal.classList.remove('open');
+                modalIframe.src = '';
+                document.body.style.overflow = '';
+            };
+
+            watchReelBtn.addEventListener('click', () => {
+                openVideoModal(defaultShowreelUrl);
+            });
+
+            projectCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const videoUrl = card.getAttribute('data-video-url');
+                    if (videoUrl) {
+                        openVideoModal(videoUrl);
+                    }
+                });
+            });
+
+            modalCloseBtn.addEventListener('click', closeVideoModal);
+
+            // Close modal when clicking outside content container
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    closeVideoModal();
+                }
+            });
+
+            // Escape key closes modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && videoModal.classList.contains('open')) {
+                    closeVideoModal();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
