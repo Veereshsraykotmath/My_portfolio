@@ -1,26 +1,12 @@
-const nodemailer = require('nodemailer');
-
-let cachedTransporter = null;
-
 /**
- * Builds (and caches) the Nodemailer transporter using Gmail SMTP.
- * Credentials always come from environment variables — never hardcoded.
+ * Sends contact-form emails using Brevo's transactional Email API (HTTPS),
+ * NOT SMTP. Render's free tier blocks outbound SMTP ports (25/465/587),
+ * but plain HTTPS requests like this are unaffected.
+ *
+ * Docs: https://developers.brevo.com/reference/sendtransacemail
  */
-function getTransporter() {
-  if (cachedTransporter) return cachedTransporter;
 
-  cachedTransporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false, // Port 587 uses STARTTLS
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
-
-  return cachedTransporter;
-}
+const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
 
 /**
  * POST /api/contact
@@ -42,22 +28,15 @@ async function sendContactEmail(req, res) {
       timeStyle: 'long',
     });
 
-    const transporter = getTransporter();
-    // Verify SMTP connection before sending email
-    try {
-      await transporter.verify();
-      console.log("✅ SMTP connection successful");
-    } catch (err) {
-      console.error("❌ SMTP verification failed:", err);
-      throw err;
-    }
-
-    await transporter.sendMail({
-      from: `"Portfolio Contact Form" <${process.env.SMTP_USER}>`,
-      to: process.env.EMAIL_TO,
-      replyTo: email,
+    const emailPayload = {
+      sender: {
+        name: 'Portfolio Contact Form',
+        email: process.env.BREVO_SENDER_EMAIL, // must be a verified sender in your Brevo account
+      },
+      to: [{ email: process.env.EMAIL_TO }],
+      replyTo: { email, name },
       subject: `New Portfolio Message: ${subject}`,
-      text: [
+      textContent: [
         `You've received a new message from your portfolio contact form.`,
         ``,
         `Name: ${name}`,
@@ -72,7 +51,7 @@ async function sendContactEmail(req, res) {
         `IP Address: ${ip}`,
         `Browser: ${userAgent}`,
       ].join('\n'),
-      html: `
+      htmlContent: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color:#111;">
           <h2 style="color:#D4AF37;">New Portfolio Contact Message</h2>
           <table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
@@ -90,7 +69,23 @@ async function sendContactEmail(req, res) {
           </p>
         </div>
       `,
+    };
+
+    const brevoResponse = await fetch(BREVO_API_URL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'api-key': process.env.BREVO_API_KEY,
+      },
+      body: JSON.stringify(emailPayload),
     });
+
+    if (!brevoResponse.ok) {
+      const errorBody = await brevoResponse.text();
+      console.error('Brevo API error:', brevoResponse.status, errorBody);
+      throw new Error(`Brevo API responded with ${brevoResponse.status}`);
+    }
 
     return res.status(200).json({
       success: true,

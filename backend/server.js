@@ -7,6 +7,9 @@ const helmet = require('helmet');
 const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
+
+// Render sits behind a proxy — this makes rate-limiting and IP detection
+// use the real client IP instead of erroring or misreading it.
 app.set('trust proxy', 1);
 
 // ── Security & parsing middleware ─────────────────────────────
