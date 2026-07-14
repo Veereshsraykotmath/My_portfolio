@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
+app.set('trust proxy', 1);
 
 // ── Security & parsing middleware ─────────────────────────────
 app.use(helmet());
