@@ -312,7 +312,7 @@
             transition: var(--transition-medium);
             opacity: 0;
             transform: translateY(20px);
-            animation: heroFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; 
+            animation: heroFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
         }
 
         .hero-cta:hover {
@@ -1140,6 +1140,15 @@
             border-bottom: 1px solid var(--border-color);
         }
 
+        .reel-thumb {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
         .reel-embed {
             position: absolute;
             inset: 0;
@@ -1591,7 +1600,8 @@
 
         <div class="work-grid">
             <!-- Project 1 -->
-            <div class="project-card" data-video-url="https://drive.google.com/file/d/13vxHX3dMxmW2tQBvXV6qlINSv80Gz8du/preview">
+            <div class="project-card"
+                data-video-url="https://drive.google.com/file/d/13vxHX3dMxmW2tQBvXV6qlINSv80Gz8du/preview">
                 <div class="project-image-wrapper">
                     <img src="assets/journey_veeray_visuals.png" alt="Journey of Veeray Visuals — Reel thumbnail"
                         class="project-image" onerror="handleImageError(this)">
@@ -1626,10 +1636,13 @@
 
         <div class="reels-grid">
 
+
             <!-- Reel 1 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C1a2B3c4D5e/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/Dasir_ytP75/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C1a2B3c4D5e/"></div>
+                    <img src="assets/621451103_18078349103021283_1788819844538646108_n.jpg"
+                        alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/Dasir_ytP75/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
@@ -1638,169 +1651,178 @@
                         color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C1a2B3c4D5e/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/Dasir_ytP75/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
             <!-- Reel 2 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C2b3C4d5E6f/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DZ2NcYoNNIK/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C2b3C4d5E6f/"></div>
+                    <img src="assets/2.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DZ2NcYoNNIK/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Music Video — Speed Ramp Edit</h3>
-                    <p class="reel-desc">High-energy beat-synced cuts with dynamic speed ramps and punchy motion
-                        transitions.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C2b3C4d5E6f/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DZ2NcYoNNIK/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
             <!-- Reel 3 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C3c4D5e6F7g/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DWjMU4hjWFQ/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C3c4D5e6F7g/"></div>
+                    <img src="assets/3.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DWjMU4hjWFQ/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Brand Reel — Product Launch</h3>
-                    <p class="reel-desc">Clean, minimal pacing built to highlight product detail shots with subtle
-                        sound design.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C3c4D5e6F7g/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DWjMU4hjWFQ/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
             <!-- Reel 4 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C4d5E6f7G8h/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DadK9TcNIVu/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C4d5E6f7G8h/"></div>
+                    <img src="assets/4.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DadK9TcNIVu/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Travel Story — Color Graded Cut</h3>
-                    <p class="reel-desc">A sensory travel edit built around light, texture, and a cinematic LUT
-                        signature.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C4d5E6f7G8h/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DadK9TcNIVu/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
             <!-- Reel 5 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C5e6F7g8H9i/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DVY7-ynksw4/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C5e6F7g8H9i/"></div>
+                    <img src="assets/5.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DVY7-ynksw4/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Dance Reel — Beat Sync Edit</h3>
-                    <p class="reel-desc">Frame-accurate cuts locked to the beat, with snappy zooms and impact
-                        transitions.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C5e6F7g8H9i/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DVY7-ynksw4/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
             <!-- Reel 6 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C6f7G8h9I0j/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DRCT2uSkvwJ/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C6f7G8h9I0j/"></div>
+                    <img src="assets/6.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DRCT2uSkvwJ/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Fashion Reel — Editorial Cut</h3>
-                    <p class="reel-desc">Slow, deliberate pacing with dramatic lighting cuts for a high-fashion
-                        editorial feel.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C6f7G8h9I0j/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DRCT2uSkvwJ/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
-
             <!-- Reel 7 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C7g8H9i0J1k/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DUqeWrJjVhf/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C7g8H9i0J1k/"></div>
+                    <img src="assets/7.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DUqeWrJjVhf/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Food Reel — Fast-Paced Montage</h3>
-                    <p class="reel-desc">Punchy, high-retention cuts with crisp foley layering for a satisfying
-                        sensory edit.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C7g8H9i0J1k/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DUqeWrJjVhf/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
             <!-- Reel 8 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C8h9I0j1K2l/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DUf2eWPkvKE/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C8h9I0j1K2l/"></div>
+                    <img src="assets/8.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DUf2eWPkvKE/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Event Recap — Emotional Cut</h3>
-                    <p class="reel-desc">A heartfelt highlight edit balancing candid moments with cinematic
-                        transitions.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C8h9I0j1K2l/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DUf2eWPkvKE/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
             <!-- Reel 9 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C9i0J1k2L3m/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DWdKI0YANaG/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C9i0J1k2L3m/"></div>
+                    <img src="assets/bau.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DWdKI0YANaG/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Automotive Reel — Cinematic Drive</h3>
-                    <p class="reel-desc">Sweeping motion shots and speed ramps built for an adrenaline-driven
-                        automotive story.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C9i0J1k2L3m/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DWdKI0YANaG/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
             </article>
 
+
             <!-- Reel 10 -->
-            <article class="reel-card" data-reel-url="https://www.instagram.com/reel/C0j1K2l3M4n/">
+            <article class="reel-card" data-reel-url="https://www.instagram.com/p/DXGgFtHjdnS/">
                 <div class="reel-embed-wrapper">
-                    <div class="reel-embed" data-reel-src="https://www.instagram.com/reel/C0j1K2l3M4n/"></div>
+                    <img src="assets/10.png" alt="Cinematic Wedding Teaser thumbnail" class="reel-thumb">
+                    <div class="reel-embed" data-reel-src="https://www.instagram.com/p/DXGgFtHjdnS/"></div>
                     <div class="reel-loading">Loading reel…</div>
                 </div>
                 <div class="reel-info">
-                    <h3 class="reel-title">Portrait Reel — Mood & Light</h3>
-                    <p class="reel-desc">An intimate, character-driven cut focused on natural light and quiet
-                        emotional beats.</p>
+                    <h3 class="reel-title">Cinematic Wedding Teaser</h3>
+                    <p class="reel-desc">A moody, emotion-first highlight cut with match-cut transitions and warm
+                        color grading.</p>
                     <div class="reel-footer">
                         <span class="reel-username">@veeray__visuals</span>
-                        <a href="https://www.instagram.com/reel/C0j1K2l3M4n/" target="_blank" rel="noopener"
+                        <a href="https://www.instagram.com/p/DXGgFtHjdnS/" target="_blank" rel="noopener"
                             class="reel-view-btn">View on Instagram ↗</a>
                     </div>
                 </div>
@@ -1813,7 +1835,7 @@
     <section id="about" class="reveal">
         <div class="about-grid">
             <div class="about-image-container">
-                <img src="assets/veeresh_portrait.png" alt="Veeresh Raykotmath Portrait" class="about-image"
+                <img src="assets/IMG_20260619_162152_195.webp" alt="Veeresh Raykotmath Portrait" class="about-image"
                     onerror="handleImageError(this)">
             </div>
             <div class="about-content">
@@ -2032,8 +2054,8 @@
 
                     <div class="form-row">
                         <label for="contactName">Full Name</label>
-                        <input type="text" id="contactName" name="name" required minlength="2"
-                            placeholder="Your name" aria-required="true">
+                        <input type="text" id="contactName" name="name" required minlength="2" placeholder="Your name"
+                            aria-required="true">
                         <span class="field-error" id="nameError"></span>
                     </div>
 
@@ -2054,8 +2076,7 @@
                     <div class="form-row">
                         <label for="contactMessage">Message</label>
                         <textarea id="contactMessage" name="message" required minlength="10" rows="5"
-                            placeholder="Tell me about your project…" aria-required="true"
-                            maxlength="5000"></textarea>
+                            placeholder="Tell me about your project…" aria-required="true" maxlength="5000"></textarea>
                         <div class="textarea-footer">
                             <span class="field-error" id="messageError"></span>
                             <span class="char-counter"><span id="charCount">0</span>/5000</span>
