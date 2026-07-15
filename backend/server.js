@@ -34,7 +34,6 @@ app.use(
     },
   })
 );
-
 // ── Routes ─────────────────────────────────────────────────────
 app.get('/', (req, res) => {
   res.json({ status: 'ok', service: 'veeray-visuals-contact-backend' });
